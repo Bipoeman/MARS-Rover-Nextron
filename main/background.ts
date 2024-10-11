@@ -43,11 +43,12 @@ ipcMain.on('message', async (event, arg) => {
   event.reply('message', `${arg} World!`)
 })
 
-ipcMain.on("connect", (event, connection) => {
+ipcMain.on("connect", async (event, connection) => {
   console.log(connection)
   console.log(net.disconnected)
   if (!connected) {
-    var client = net.connect(8000, "rover.local", function () {
+    // event.reply("connect","connecting")
+    var client = await net.connect(8000, "rover.local", function () {
       event.reply("connect", "connected")
       connected = true;
       console.log('connected to server!');
@@ -63,6 +64,8 @@ ipcMain.on("connect", (event, connection) => {
 
     client.on('end', function () {
       event.reply("connect", "disconnected")
+      globalClient.end();
+      client.end()
       connected = false;
       console.log('disconnected from server');
     });
@@ -71,6 +74,16 @@ ipcMain.on("connect", (event, connection) => {
     globalClient.end()
   }
 
+})
+
+ipcMain.on("getStatus",(event,data)=>{
+  if (connected){
+    event.reply("getStatus","connected")
+  }
+  else{
+    event.reply("getStatus","disconnected")
+
+  }
 })
 
 ipcMain.on("keyboard", (event, key) => {
