@@ -30,17 +30,22 @@ export default function ControlButton() {
             document.removeEventListener("keyup", keyUpHandler);
         };
     }, []);
-    return (<></>
-        // <span>
-        //     <span className="bg-yellow-200 grid">
-        //         <button id="fw" type="button" className="bg-blue-600 p-2 m-1 rounded-md hover:bg-blue-500">Forward ⬆</button>
-        //         <button id="lf" type="button" className="bg-blue-600 p-2 m-1 rounded-md hover:bg-blue-500">⬅ Left</button>
-        //         <button id="rt" type="button" className="bg-blue-600 p-2 m-1 rounded-md hover:bg-blue-500">Right ➡</button>
-        //         <button id="bk" type="button" className="bg-blue-600 p-2 m-1 rounded-md hover:bg-blue-500">Backward ⬇</button>
-        //     </span>
-        //     {/* <span>
-        //         <input type="range" min="1" max="100" value="50" id="myRange"></input>
-        //     </span> */}
-        // </span>
+
+    // function onForward(){
+
+    // }
+
+    return (
+        <span>
+            <span className="bg-yellow-200 grid">
+                <button id="fw" type="button" className="bg-blue-600 p-2 m-1 rounded-md hover:bg-blue-500">Forward ⬆</button>
+                <button id="lf" type="button" className="bg-blue-600 p-2 m-1 rounded-md hover:bg-blue-500">⬅ Left</button>
+                <button id="rt" type="button" className="bg-blue-600 p-2 m-1 rounded-md hover:bg-blue-500">Right ➡</button>
+                <button id="bk" type="button" className="bg-blue-600 p-2 m-1 rounded-md hover:bg-blue-500">Backward ⬇</button>
+            </span>
+            {/* <span>
+                <input type="range" min="1" max="100" value="50" id="myRange"></input>
+            </span> */}
+        </span>
     );
 }

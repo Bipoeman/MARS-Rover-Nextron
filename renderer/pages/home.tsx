@@ -36,7 +36,10 @@ export default function HomePage() {
       }
       setStatus(ShowConnectionStatus(message))
     })
-  })
+    return ()=>{
+      
+    }
+  },[])
 
   function ShowConnectionStatus(connectionText: string) {
     if (connectionText.trim() === "connected") {
