@@ -1,5 +1,5 @@
-appId: com.example.nextron
-productName: My Nextron App
+appId: com.openfruit.project
+productName: Mars Rover
 copyright: Copyright © 2018 Yoshihide Shiono
 directories:
   output: dist
@@ -10,3 +10,9 @@ files:
       - package.json
       - app
 publish: null
+nsis:
+  allowToChangeInstallationDirectory: true
+  oneClick: false
+  perMachine: true
+  runAfterFinish: false
+  warningsAsErrors: false # off b/c RmTrailingSlash gives a warning

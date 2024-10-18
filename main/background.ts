@@ -29,6 +29,7 @@ if (isProd) {
   const mainWindow = createWindow('main', {
     width: 1000,
     height: 600,
+    icon: `./resources/icon.png`,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },

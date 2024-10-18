@@ -10,6 +10,16 @@
     "build": "nextron build",
     "postinstall": "electron-builder install-app-deps"
   },
+  "win": {
+    "icon": "./resources/icon.png",
+    "target": "nsis"
+  },
+  "nsis": {
+    "allowElevation": false,
+    "allowToChangeInstallationDirectory": true,
+    "oneClick": false,
+    "perMachine": true
+  },
   "dependencies": {
     "@nextui-org/spinner": "^2.0.34",
     "electron-serve": "^1.3.0",

@@ -36,10 +36,10 @@ export default function HomePage() {
       }
       setStatus(ShowConnectionStatus(message))
     })
-    return ()=>{
-      
+    return () => {
+
     }
-  },[])
+  }, [])
 
   function ShowConnectionStatus(connectionText: string) {
     if (connectionText.trim() === "connected") {
@@ -68,25 +68,30 @@ export default function HomePage() {
   }
 
   return (
-    <div className="block h-[100vh]">
-      <header className="inline-block w-full">
-        <h1 className="text-center text-2xl">
-          Rover Camera Display
-        </h1>
-      </header>
-      <div className=''>
-        <img className="bg-white text-gray-500 m-5 max-w-[1366px] inline-block" src="http://rover:7123/stream.mjpg" />
-        <span className="inline-block">
-          <span className='mt-4'>
-            Status :
-            {status}
+    <>
+      <Head>
+        <title>Mars Rover Control</title>
+      </Head>
+      <div className="block h-[100vh]">
+        <header className="inline-block w-full">
+          <h1 className="text-center text-2xl">
+            Rover Camera Display
+          </h1>
+        </header>
+        <div className=''>
+          <img className="bg-white text-gray-500 m-5 max-w-[1366px] inline-block" src="http://rover:7123/stream.mjpg" />
+          <span className="inline-block">
+            <span className='mt-4'>
+              Status :
+              {status}
+            </span>
+            <span className='block'>
+              <RoverConnection btnTxt={connectBtnTxt} />
+              <ControlButton />
+            </span>
           </span>
-          <span className='block'>
-            <RoverConnection btnTxt={connectBtnTxt} />
-            <ControlButton />
-          </span>
-        </span>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
