@@ -2,6 +2,7 @@ import path from 'path'
 import { app, ipcMain } from 'electron'
 import serve from 'electron-serve'
 import { createWindow } from './helpers'
+import {mdns,foundDevice} from "./device_scanner"
 
 var net = require('net')
 var connected = false;
@@ -24,8 +25,8 @@ if (isProd) {
 }
 
 ; (async () => {
-  await app.whenReady()
-
+  await app.whenReady();
+  mdns
   const mainWindow = createWindow('main', {
     width: 1000,
     height: 600,
@@ -119,6 +120,11 @@ ipcMain.on("keyboard", (event, key) => {
   }
   // if (net.connected)
 })
+
+ipcMain.on("getRover",(event,enable : boolean)=>{
+  event.reply("getRover",foundDevice)
+})
+
 
 function keypressToSpeed(keypressed){
   console.log(keypressed)
