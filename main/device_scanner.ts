@@ -31,31 +31,46 @@ var mdns = mdnss(
 
 var foundDevice = {}
 
-var intervalControl = ResumableInterval(() => {
-    console.log("Query")
-    mdns.query({
-        questions: [{
-            name: 'jellyfish.local',
-            type: 'A',
-            class: "IN"
-        }]
-    })
-    foundDevice = {}
+// var intervalControl = ResumableInterval(() => {
+//   console.log("Query")
+//   mdns.query({
+//     questions: [{
+//       name: 'jellyfish.local',
+//       type: 'A',
+//       class: "IN"
+//     }]
+//   })
+//   foundDevice = {}
 
-}, 2000)
-intervalControl.start()
+// }, 2000)
+
+var respond = (response : Object) => {}
+
+export function discoverRover(onFound : (response : Object) => void) {
+  foundDevice = {}
+  respond = onFound
+  console.log("Query")
+  mdns.query({
+    questions: [{
+      name: 'jellyfish.local',
+      type: 'A',
+      class: "IN"
+    }]
+  })
+}
 
 mdns.on('response', function (response) {
-    if (response.answers[0] && response.answers[0].name.includes("jellyfish.local")) {
-        var ip = response.answers[0]['data']
-        var name = response.answers[1]['data']['target']
-        foundDevice[name] = ip
-        console.log(foundDevice)
-    }
+  if (response.answers[0] && response.answers[0].name.includes("jellyfish.local")) {
+    var ip = response.answers[0]['data']
+    var name = response.answers[1]['data']['target']
+    foundDevice[name] = ip
+    respond(foundDevice)
+    console.log(foundDevice)
+  }
 })
 
 
 mdns.on('query', function (query) { })
 
-export { intervalControl, mdns, foundDevice}
+export { mdns, foundDevice }
 

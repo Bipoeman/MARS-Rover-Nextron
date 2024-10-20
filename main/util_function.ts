@@ -41,3 +41,69 @@ export function ResumableInterval(callback, delay) {
     // Return an object with public methods
     return { start, pause, resume, stop };
 }
+
+export function keypressToSpeed(keypressed){
+    console.log(keypressed)
+    let left,right
+    if (keypressed['W'] === 0 && keypressed['S'] === 0) {
+      if (keypressed['D'] === 1 && keypressed['A'] === 0) {
+        left = 150;
+        right = -150;
+      } else if (keypressed['A'] === 1 && keypressed['D'] === 0) {
+        left = -150;
+        right = 150;
+      } else if (keypressed['A'] === 0 && keypressed['D'] === 0) {
+        left = 0;
+        right = 0;
+      } else if (keypressed['A'] === 1 && keypressed['D'] === 1) {
+        left = 150;
+        right = 150;
+      }
+    } else if (keypressed['W'] === 1 && keypressed['S'] === 0) {
+      if (keypressed['D'] === 1 && keypressed['A'] === 0) {
+        left = 255;
+        right = 150;
+      } else if (keypressed['A'] === 1 && keypressed['D'] === 0) {
+        left = 150;
+        right = 255;
+      } else if (keypressed['A'] === 0 && keypressed['D'] === 0) {
+        left = 255;
+        right = 255;
+      } else if (keypressed['A'] === 1 && keypressed['D'] === 1) {
+        left = 255;
+        right = 255;
+      }
+    } else if (keypressed['S'] === 0 && keypressed['W'] === 0) {
+      if (keypressed['D'] === 1 && keypressed['A'] === 0) {
+        left = -255;
+        right = -150;
+      } else if (keypressed['A'] === 1 && keypressed['D'] === 0) {
+        left = -150;
+        right = -255;
+      } else if (keypressed['A'] === 0 && keypressed['D'] === 0) {
+        left = 0;
+        right = 0;
+      } else if (keypressed['A'] === 1 && keypressed['D'] === 1) {
+        left = -150;
+        right = -150;
+      }
+    } else if (keypressed['S'] === 1 && keypressed['W'] === 0) {
+      if (keypressed['D'] === 1 && keypressed['A'] === 0) {
+        left = -255;
+        right = -150;
+      } else if (keypressed['A'] === 1 && keypressed['D'] === 0) {
+        left = -150;
+        right = -255;
+      } else if (keypressed['A'] === 0 && keypressed['D'] === 0) {
+        left = -255;
+        right = -255;
+      } else if (keypressed['A'] === 1 && keypressed['D'] === 1) {
+        left = -255;
+        right = -255;
+      }
+    }
+    return {
+      "left":left,
+      "right":right,
+    }
+  }

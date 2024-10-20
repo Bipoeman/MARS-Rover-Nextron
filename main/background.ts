@@ -2,7 +2,9 @@ import path from 'path'
 import { app, ipcMain } from 'electron'
 import serve from 'electron-serve'
 import { createWindow } from './helpers'
-import {mdns,foundDevice} from "./device_scanner"
+import { mdns, foundDevice, discoverRover } from "./device_scanner"
+import { g29 } from './joy_interface'
+import { keypressToSpeed } from './util_function'
 
 var net = require('net')
 var connected = false;
@@ -27,6 +29,7 @@ if (isProd) {
 ; (async () => {
   await app.whenReady();
   mdns
+  g29
   const mainWindow = createWindow('main', {
     width: 1000,
     height: 600,
@@ -56,9 +59,12 @@ ipcMain.on('message', async (event, arg) => {
 ipcMain.on("connect", async (event, connection) => {
   console.log(connection)
   console.log(net.disconnected)
+  if (!connection){
+    globalClient.end()
+  }
   if (!connected) {
     // event.reply("connect","connecting")
-    var client = await net.connect(8000, "rover.local", function () {
+    var client = await net.connect(connection.port, connection.host, function () {
       event.reply("connect", "connected")
       connected = true;
       console.log('connected to server!');
@@ -99,19 +105,19 @@ ipcMain.on("keyboard", (event, key) => {
   // console.log(key)
   if ((key['key'] === "W" || key['key'] === "A" || key['key'] === "S" || key['key'] === "D")) {
     keypressed[key['key']] = key['state']
-    if(JSON.stringify(keypressed) != JSON.stringify(last_keypressed)){
+    if (JSON.stringify(keypressed) != JSON.stringify(last_keypressed)) {
       console.log("Sending Speed")
       var speed = keypressToSpeed(keypressed)
       if (connected) {
         console.log(speed)
         globalClient.write(JSON.stringify(speed))
       }
-      
+
       console.log(speed)
       last_keypressed = { ...keypressed }
     }
   }
-  else if (!(key['key'] == "W" || key['key'] == "A" || key['key'] == "S" || key['key'] == "D")){
+  else if (!(key['key'] == "W" || key['key'] == "A" || key['key'] == "S" || key['key'] == "D")) {
     console.log(`Sending normal key ${JSON.stringify(key)}`)
     // console.log(key)
     if (connected) {
@@ -121,73 +127,11 @@ ipcMain.on("keyboard", (event, key) => {
   // if (net.connected)
 })
 
-ipcMain.on("getRover",(event,enable : boolean)=>{
-  event.reply("getRover",foundDevice)
+ipcMain.on("getRover", (event, enable: boolean) => {
+  discoverRover((foundDevice) => {
+    console.log("Reply")
+    event.reply("getRover", foundDevice)
+  })
 })
 
 
-function keypressToSpeed(keypressed){
-  console.log(keypressed)
-  let left,right
-  if (keypressed['W'] === 0 && keypressed['S'] === 0) {
-    if (keypressed['D'] === 1 && keypressed['A'] === 0) {
-      left = 150;
-      right = -150;
-    } else if (keypressed['A'] === 1 && keypressed['D'] === 0) {
-      left = -150;
-      right = 150;
-    } else if (keypressed['A'] === 0 && keypressed['D'] === 0) {
-      left = 0;
-      right = 0;
-    } else if (keypressed['A'] === 1 && keypressed['D'] === 1) {
-      left = 150;
-      right = 150;
-    }
-  } else if (keypressed['W'] === 1 && keypressed['S'] === 0) {
-    if (keypressed['D'] === 1 && keypressed['A'] === 0) {
-      left = 255;
-      right = 150;
-    } else if (keypressed['A'] === 1 && keypressed['D'] === 0) {
-      left = 150;
-      right = 255;
-    } else if (keypressed['A'] === 0 && keypressed['D'] === 0) {
-      left = 255;
-      right = 255;
-    } else if (keypressed['A'] === 1 && keypressed['D'] === 1) {
-      left = 255;
-      right = 255;
-    }
-  } else if (keypressed['S'] === 0 && keypressed['W'] === 0) {
-    if (keypressed['D'] === 1 && keypressed['A'] === 0) {
-      left = -255;
-      right = -150;
-    } else if (keypressed['A'] === 1 && keypressed['D'] === 0) {
-      left = -150;
-      right = -255;
-    } else if (keypressed['A'] === 0 && keypressed['D'] === 0) {
-      left = 0;
-      right = 0;
-    } else if (keypressed['A'] === 1 && keypressed['D'] === 1) {
-      left = -150;
-      right = -150;
-    }
-  } else if (keypressed['S'] === 1 && keypressed['W'] === 0) {
-    if (keypressed['D'] === 1 && keypressed['A'] === 0) {
-      left = -255;
-      right = -150;
-    } else if (keypressed['A'] === 1 && keypressed['D'] === 0) {
-      left = -150;
-      right = -255;
-    } else if (keypressed['A'] === 0 && keypressed['D'] === 0) {
-      left = -255;
-      right = -255;
-    } else if (keypressed['A'] === 1 && keypressed['D'] === 1) {
-      left = -255;
-      right = -255;
-    }
-  }
-  return {
-    "left":left,
-    "right":right,
-  }
-}
