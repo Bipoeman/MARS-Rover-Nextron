@@ -6,9 +6,11 @@ import { mdns, foundDevice, discoverRover } from "./device_scanner"
 import { g29 } from './joy_interface'
 import { keypressToSpeed } from './util_function'
 
-var net = require('net')
+import * as net from "net";
+import { Socket } from 'net'
+
 var connected = false;
-var globalClient: any
+export var globalClient : Socket
 
 var keypressed = {
   'W': 0,
@@ -58,19 +60,22 @@ ipcMain.on('message', async (event, arg) => {
 
 ipcMain.on("connect", async (event, connection) => {
   console.log(connection)
-  console.log(net.disconnected)
-  if (!connection){
+  if (globalClient){
+    console.log(`Connecting : ${globalClient.connecting} Closed : ${globalClient.closed}`)
+  }
+  if (globalClient && !connection){
     globalClient.end()
   }
   if (!connected) {
     // event.reply("connect","connecting")
-    var client = await net.connect(connection.port, connection.host, function () {
+    var client : Socket = await net.connect(connection.port, connection.host, function () {
       event.reply("connect", "connected")
       connected = true;
       console.log('connected to server!');
       client.write("Hello")
     });
     globalClient = client
+
 
     client.on('data', function (data) {
       console.log(data.toString());
@@ -79,7 +84,7 @@ ipcMain.on("connect", async (event, connection) => {
 
     client.on('end', function () {
       event.reply("connect", "disconnected")
-      globalClient.end();
+      // globalClient.end();
       client.end()
       connected = false;
       console.log('disconnected from server');
@@ -133,5 +138,3 @@ ipcMain.on("getRover", (event, enable: boolean) => {
     event.reply("getRover", foundDevice)
   })
 })
-
-
