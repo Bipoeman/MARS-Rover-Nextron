@@ -5,7 +5,7 @@ import ControlButton from './control_btn'
 import RoverConnection from './connect_btn'
 import { Spinner } from '@nextui-org/spinner'
 import { ColorRing, Grid } from 'react-loader-spinner'
-import { ResumableInterval } from './util_function'
+import { ResumableInterval } from '../../main/util_function'
 
 export default function HomePage() {
   var [status, setStatus] = useState(() => ShowConnectionStatus("disconnected"))
