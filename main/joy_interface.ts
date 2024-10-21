@@ -4,7 +4,7 @@ import { globalClient } from './background';
 
 import { ResumableInterval } from './util_function';
 
-
+var steerMode = 1 // either mode 0 or 1
 
 const devices = getDeviceList();
 var joyVer = {
@@ -13,26 +13,47 @@ var joyVer = {
 }
 var joyConfig = {
     autocenter: true,
-    range: 360,
+    range: steerMode == 0 ? 360 : 900,
 }
 
 var joyValue = {
     steerLeft: 0,
     steerRight: 0,
-    padel: 0
+    padel: 0,
+    brake: 0
 }
 
 var gear = 1
 
 var sendIntervalControl = ResumableInterval(() => {
     if (globalClient && !globalClient.closed) {
+        var padelOut = joyValue.padel - joyValue.brake;
+        if (padelOut < 0){
+            padelOut = 0
+        }
+        if (steerMode === 0){
+            /**
+             * Full speed reduce speed to steer
+             */
+            var left = ((1 - joyValue.steerRight) * 255) * joyValue.padel * gear
+            var right = ((1 - joyValue.steerLeft) * 255) * joyValue.padel * gear
+        }
+        else if (steerMode === 1){
+            /**
+             * rotate to steer
+             */
+            var left = (2*(0.5 - joyValue.steerRight) * 255) * padelOut * gear
+            var right = (2*(0.5 - joyValue.steerLeft) * 255) * padelOut * gear
+            
+        }
+
         var speedData = JSON.stringify({
-            left: Math.floor((joyValue.steerLeft * 255) * joyValue.padel * gear),
-            right: Math.floor((joyValue.steerRight * 255) * joyValue.padel * gear),
+            left: Math.floor(left),
+            right: Math.floor(right),
         })
         console.log(speedData)
         globalClient.write(speedData)
-        if (joyValue.padel == 0){
+        if (padelOut == 0){
             sendIntervalControl.pause()
         }
     }
@@ -72,14 +93,23 @@ g29.on('pedals-gas', function (val) {
 
     // console.log(val)
 })
-g29.on('pedals-clutch', function (val) {
-    console.log("Brake", val)
+g29.on('pedals-brake', function (val) {
+    // console.log("Brake", val)
+    joyValue.brake = val
+    sendIntervalControl.resume()
+
     // g.leds(val)
 })
 g29.on("wheel-turn", (value) => {
 
-    joyValue.steerLeft = value / 100
-    joyValue.steerRight = 1 - joyValue.steerLeft
+    joyValue.steerLeft = (value - 50) / 50
+    joyValue.steerRight = (50 - value) / 50
+    if (joyValue.steerLeft < 0){
+        joyValue.steerLeft = 0
+    }
+    if (joyValue.steerRight < 0){
+        joyValue.steerRight = 0
+    }
     // joyValue.steerRight = (1-((value - 50) / 50)) - 1
     var ledVal = Math.abs(value / 100 - 0.5) * 2
     console.log(joyValue)
