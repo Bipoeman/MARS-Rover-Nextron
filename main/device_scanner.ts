@@ -7,9 +7,9 @@ import { ResumableInterval } from "./util_function";
 console.clear()
 var networkInterfaces = os.networkInterfaces();
 // console.log(networkInterfaces)
-var ipaddr = []
+var ipaddr : string[] = []
 var macs = []
-var interfaces = networkInterfaces['Ethernet 5']
+var interfaces = networkInterfaces['Wi-Fi']
 console.log(interfaces)
 interfaces && interfaces.forEach((ip) => {
   if (ip.family == "IPv4") {
@@ -17,6 +17,7 @@ interfaces && interfaces.forEach((ip) => {
     macs.push(ip.mac)
   };
 })
+
 var mdns = mdnss(
   {
     multicast: true, // use udp multicasting
@@ -60,6 +61,7 @@ export function discoverRover(onFound : (response : Object) => void) {
 }
 
 mdns.on('response', function (response) {
+  // console.log(response.answers)
   if (response.answers[0] && response.answers[0].name.includes("jellyfish.local")) {
     var ip = response.answers[0]['data']
     var name = response.answers[1]['data']['target']
