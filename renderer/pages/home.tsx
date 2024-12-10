@@ -14,7 +14,8 @@ export default function HomePage() {
   var [isScan, setIsScan] = useState(() => false)
   var [roverList, setRoverList] = useState(() => Object)
   var [isConnected, setIsConnected] = useState(false)
-
+  var [takePictureStatus, setTakePictureStatus] = useState(<></>)
+  var [takePictureStatusOpacity,setTakePictureStatusOpacity] = useState(0)
 
   var [requestIntervalControl, setRequestIntervalControl] = useState(() =>
     ResumableInterval(() => {
@@ -29,6 +30,17 @@ export default function HomePage() {
     onDisconnnect()
     window.ipc.on("getStatus", (message: string) => {
       setIsConnected(prev => message.trim() === "connected")
+    })
+    
+    window.ipc.on("take_picture", (response) => {
+      // console.log(`Display ${response['message']}`)
+      setTakePictureStatus(<>{response['message']}</>)
+      setTakePictureStatusOpacity(100);
+      setTimeout(()=>{
+        // console.log(`No Display ${response['message']}`)
+        // setTakePictureStatus(<></>)
+        setTakePictureStatusOpacity(0);
+      },1200)
     })
 
     window.ipc.on("getRover", getRover)
@@ -130,6 +142,9 @@ export default function HomePage() {
       requestIntervalControl.start()
     }
   }
+  function takePicture() {
+    window.ipc.send("take_picture",null)
+  }
 
 
   return (
@@ -157,9 +172,11 @@ export default function HomePage() {
               {/* <button className='inline-block bg-blue-600 mx-2 px-4 py-2 rounded-md active:border-white border-4 border-hidden hover:bg-blue-400' onClick={preloadImage}>Connect Video</button> */}
               <button className='inline-block bg-blue-600 mx-2 px-4 py-2 rounded-md active:border-white border-4 border-hidden hover:bg-blue-400' onClick={startScanRover}>Scan Rover</button>
               {isScan ? <ColorRing wrapperClass='inline padding-0' width={50} /> : <></>}
-              {isConnected ? <button onClick={onDisconnnect} className="mx-2 my-2 px-3 py-2 rounded-md bg-blue-600 hover:bg-blue-500">Disconnect</button> : <></>}
+              {isConnected ? <button onClick={onDisconnnect} className="mx-2 my-2 px-3 py-2 rounded-md bg-[#CC2222] hover:bg-blue-500">Disconnect</button> : <></>}
               <ControlButton />
               <RoverListDisplay />
+              <button className='inline-block bg-blue-600 mx-2 px-4 py-2 rounded-md active:border-white border-4 border-hidden hover:bg-blue-400' onClick={takePicture}>Take Picture 📷</button>
+              <div className={`inline-block opacity-${takePictureStatusOpacity} transition-opacity ease-out duration-${takePictureStatusOpacity == 100 ? 0 : 1000}`}>{takePictureStatus}</div>
             </span>
           </span>
         </div>
