@@ -7,7 +7,7 @@ import { ResumableInterval } from "./util_function";
 console.clear()
 var networkInterfaces = os.networkInterfaces();
 // console.log(networkInterfaces)
-var ipaddr = []
+var ipaddr : string[] = []
 var macs = []
 var interfaces = networkInterfaces['Ethernet']
 console.log(interfaces)
@@ -17,6 +17,7 @@ interfaces && interfaces.forEach((ip) => {
     macs.push(ip.mac)
   };
 })
+
 // var mdns = mdnss()
 var mdns = mdnss(
   {

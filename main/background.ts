@@ -12,6 +12,8 @@ import { Socket } from 'net'
 var connected = false;
 export var globalClient : Socket
 
+var globalConnection = {}
+
 var keypressed = {
   'W': 0,
   'A': 0,
@@ -73,6 +75,7 @@ ipcMain.on("connect", async (event, connection) => {
       connected = true;
       console.log('connected to server!');
       client.write("Hello")
+      globalConnection = {...connection}
     });
     globalClient = client
 
@@ -137,4 +140,10 @@ ipcMain.on("getRover", (event, enable: boolean) => {
     console.log("Reply")
     event.reply("getRover", foundDevice)
   })
+})
+
+ipcMain.on("take_picture", async (event, param: boolean) => {
+  var returnStatus = await (await fetch(`http://${globalConnection.host}:7123/takephoto`)).json()
+  console.log(returnStatus)
+  event.reply("take_picture",returnStatus)
 })
