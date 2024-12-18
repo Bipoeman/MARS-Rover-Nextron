@@ -9,7 +9,7 @@ var networkInterfaces = os.networkInterfaces();
 // console.log(networkInterfaces)
 var ipaddr : string[] = []
 var macs = []
-var interfaces = networkInterfaces['Wi-Fi']
+var interfaces = networkInterfaces['Ethernet']
 console.log(interfaces)
 interfaces && interfaces.forEach((ip) => {
   if (ip.family == "IPv4") {
@@ -18,6 +18,7 @@ interfaces && interfaces.forEach((ip) => {
   };
 })
 
+// var mdns = mdnss()
 var mdns = mdnss(
   {
     multicast: true, // use udp multicasting
@@ -72,7 +73,9 @@ mdns.on('response', function (response) {
 })
 
 
-mdns.on('query', function (query) { })
+mdns.on('query', function (query) { 
+  // console.log(query.answers)
+})
 
 export { mdns, foundDevice }
 
