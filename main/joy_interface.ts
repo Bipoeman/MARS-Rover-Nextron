@@ -12,8 +12,8 @@ var joyVer = {
     0xC260: "PS4",
 }
 var joyConfig = {
-    autocenter: true,
-    range: steerMode == 0 ? 360 : 900,
+    autocenter: false,
+    range: steerMode == 0 ? 360 : 360,
 }
 
 var joyValue = {
