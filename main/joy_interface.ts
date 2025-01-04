@@ -4,7 +4,7 @@ import { globalClient } from './background';
 
 import { ResumableInterval } from './util_function';
 
-var steerMode = 1 // either mode 0 or 1
+var steerMode = 0 // either mode 0 or 1
 
 const devices = getDeviceList();
 var joyVer = {
@@ -12,8 +12,8 @@ var joyVer = {
     0xC260: "PS4",
 }
 var joyConfig = {
-    autocenter: true,
-    range: steerMode == 0 ? 360 : 900,
+    autocenter: false,
+    range: steerMode == 0 ? 360 : 360,
 }
 
 var joyValue = {
@@ -28,23 +28,23 @@ var gear = 1
 var sendIntervalControl = ResumableInterval(() => {
     if (globalClient && !globalClient.closed) {
         var padelOut = joyValue.padel - joyValue.brake;
-        if (padelOut < 0){
+        if (padelOut < 0) {
             padelOut = 0
         }
-        if (steerMode === 0){
+        if (steerMode === 0) {
             /**
              * Full speed reduce speed to steer
              */
             var left = ((1 - joyValue.steerRight) * 255) * joyValue.padel * gear
             var right = ((1 - joyValue.steerLeft) * 255) * joyValue.padel * gear
         }
-        else if (steerMode === 1){
+        else if (steerMode === 1) {
             /**
              * rotate to steer
              */
-            var left = (2*(0.5 - joyValue.steerRight) * 255) * padelOut * gear
-            var right = (2*(0.5 - joyValue.steerLeft) * 255) * padelOut * gear
-            
+            var left = (2 * (0.5 - joyValue.steerRight) * 255) * padelOut * gear
+            var right = (2 * (0.5 - joyValue.steerLeft) * 255) * padelOut * gear
+
         }
 
         var speedData = JSON.stringify({
@@ -53,7 +53,7 @@ var sendIntervalControl = ResumableInterval(() => {
         })
         console.log(speedData)
         globalClient.write(speedData)
-        if (padelOut == 0){
+        if (padelOut == 0) {
             sendIntervalControl.pause()
         }
     }
@@ -63,17 +63,25 @@ sendIntervalControl.start()
 // console.log(devices)
 devices.forEach(device => {
     var idProduct = device.deviceDescriptor.idProduct
+    try {
+        g29.connect(joyConfig, (err) => { })
+
+    }
+    catch {
+
+    }
     if (idProduct && idProduct === 0xC24F || idProduct === 0xC260) {
         console.log("Initial check Joy already connected", joyVer[idProduct])
-        g29.connect(joyConfig, (err) => { })
+        // g29.connect(joyConfig, (err) => { })
     }
 })
 usb.on("attach", (device) => {
+    console.log("Attached", device.deviceDescriptor.idProduct, 0xC24F)
     var idProduct = device.deviceDescriptor.idProduct
     // G29 is 0xC24F for PS3 and 0xC260 for PS4
+    g29.connect(joyConfig, (err) => { })
     if (idProduct && idProduct === 0xC24F || idProduct === 0xC260) {
         console.log("Joy Connected", joyVer[idProduct])
-        g29.connect(joyConfig, (err) => { })
     }
 })
 
@@ -104,10 +112,10 @@ g29.on("wheel-turn", (value) => {
 
     joyValue.steerLeft = (value - 50) / 50
     joyValue.steerRight = (50 - value) / 50
-    if (joyValue.steerLeft < 0){
+    if (joyValue.steerLeft < 0) {
         joyValue.steerLeft = 0
     }
-    if (joyValue.steerRight < 0){
+    if (joyValue.steerRight < 0) {
         joyValue.steerRight = 0
     }
     // joyValue.steerRight = (1-((value - 50) / 50)) - 1
@@ -137,11 +145,11 @@ g29.on("wheel-spinner", (value) => {
 g29.on("wheel-button_spinner", (value) => {
     count = 0
     console.log(`Spinner : ${count}`);
-    if (globalClient && !globalClient.closed){
+    if (globalClient && !globalClient.closed) {
         var camData = JSON.stringify({
-            cam : "center"
+            cam: "center"
         })
-        
+
         globalClient.write(camData)
     }
 })
@@ -157,13 +165,13 @@ g29.on("wheel-dpad", (value) => {
         7: "cam-left",
         // 8: "up-left",
     }
-    if (mapping[value]){
-        if (globalClient && !globalClient.closed){
+    if (mapping[value]) {
+        if (globalClient && !globalClient.closed) {
             console.log(mapping[value])
             var camData = JSON.stringify({
-                cam : mapping[value]
+                cam: mapping[value]
             })
-            
+
             globalClient.write(camData)
         }
     }

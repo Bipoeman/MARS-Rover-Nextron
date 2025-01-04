@@ -9,15 +9,17 @@ var networkInterfaces = os.networkInterfaces();
 // console.log(networkInterfaces)
 var ipaddr : string[] = []
 var macs = []
-var interfaces = networkInterfaces['Wi-Fi']
-console.log(interfaces)
+var interfaces = networkInterfaces['Ethernet']
+// console.log(interfaces)
 interfaces && interfaces.forEach((ip) => {
   if (ip.family == "IPv4") {
     ipaddr.push(ip.address)
     macs.push(ip.mac)
+    console.log(ipaddr)
   };
 })
 
+// var mdns = mdnss()
 var mdns = mdnss(
   {
     multicast: true, // use udp multicasting
@@ -63,16 +65,21 @@ export function discoverRover(onFound : (response : Object) => void) {
 mdns.on('response', function (response) {
   // console.log(response.answers)
   if (response.answers[0] && response.answers[0].name.includes("jellyfish.local")) {
-    var ip = response.answers[0]['data']
-    var name = response.answers[1]['data']['target']
-    foundDevice[name] = ip
-    respond(foundDevice)
-    console.log(foundDevice)
+    console.log("Answers")
+    // if (response.answers[0]['data']){
+      var ip = response.answers[0]['data']
+      var name = response.answers[1]['data']['target']
+      foundDevice[name] = ip
+      respond(foundDevice)
+      console.log(foundDevice)
+    // }
   }
 })
 
 
-mdns.on('query', function (query) { })
+mdns.on('query', function (query) { 
+  // console.log(query.answers)
+})
 
 export { mdns, foundDevice }
 
