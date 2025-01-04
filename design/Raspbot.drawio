@@ -1,0 +1,287 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.17 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.17">
+  <diagram name="Page-1" id="KJ2CoAAkBJzV66dclzXa">
+    <mxGraphModel dx="1430" dy="830" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2336" pageHeight="1654" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="oN9IETQt-yYeFzmijskH-64" value="" style="swimlane;startSize=0;" vertex="1" parent="1">
+          <mxGeometry x="700" y="230" width="860" height="650" as="geometry">
+            <mxRectangle x="700" y="230" width="50" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="oN9IETQt-yYeFzmijskH-64" source="oN9IETQt-yYeFzmijskH-1" target="oN9IETQt-yYeFzmijskH-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-44" value="I2C" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=TT Rounds Neue Trial DemiBold;" vertex="1" connectable="0" parent="oN9IETQt-yYeFzmijskH-3">
+          <mxGeometry x="-0.0857" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;" edge="1" parent="oN9IETQt-yYeFzmijskH-64" source="oN9IETQt-yYeFzmijskH-1" target="oN9IETQt-yYeFzmijskH-27">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="354.98" y="305" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-38" value="CSI" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=TT Rounds Neue Trial DemiBold;" vertex="1" connectable="0" parent="oN9IETQt-yYeFzmijskH-26">
+          <mxGeometry x="0.2205" y="1" relative="1" as="geometry">
+            <mxPoint x="1" y="5" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;" edge="1" parent="oN9IETQt-yYeFzmijskH-64" source="oN9IETQt-yYeFzmijskH-1" target="oN9IETQt-yYeFzmijskH-29">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="354.98" y="495" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="384.98" y="460" />
+              <mxPoint x="454.98" y="460" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-43" value="GPIO" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=TT Rounds Neue Trial DemiBold;" vertex="1" connectable="0" parent="oN9IETQt-yYeFzmijskH-28">
+          <mxGeometry x="-0.0305" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="oN9IETQt-yYeFzmijskH-64" source="oN9IETQt-yYeFzmijskH-1" target="oN9IETQt-yYeFzmijskH-31">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="194.98" y="315" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="214.98" y="395" />
+              <mxPoint x="214.98" y="365" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-39" value="GPIO" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=TT Rounds Neue Trial DemiBold;" vertex="1" connectable="0" parent="oN9IETQt-yYeFzmijskH-30">
+          <mxGeometry x="-0.585" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1.009;entryY=0.454;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="oN9IETQt-yYeFzmijskH-64" source="oN9IETQt-yYeFzmijskH-1" target="oN9IETQt-yYeFzmijskH-33">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="174.98" y="475" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="214.98" y="425" />
+              <mxPoint x="214.98" y="447" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-40" value="GPIO" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=TT Rounds Neue Trial DemiBold;" vertex="1" connectable="0" parent="oN9IETQt-yYeFzmijskH-32">
+          <mxGeometry x="-0.5067" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;endArrow=none;endFill=0;" edge="1" parent="oN9IETQt-yYeFzmijskH-64" source="oN9IETQt-yYeFzmijskH-1" target="oN9IETQt-yYeFzmijskH-35">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="204.98" y="505" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="324.98" y="465" />
+              <mxPoint x="204.98" y="465" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-41" value="GPIO" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=TT Rounds Neue Trial DemiBold;" vertex="1" connectable="0" parent="oN9IETQt-yYeFzmijskH-34">
+          <mxGeometry x="-0.0438" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="oN9IETQt-yYeFzmijskH-64" source="oN9IETQt-yYeFzmijskH-1" target="oN9IETQt-yYeFzmijskH-37">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="354.98" y="545" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-42" value="GPIO" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=TT Rounds Neue Trial DemiBold;" vertex="1" connectable="0" parent="oN9IETQt-yYeFzmijskH-36">
+          <mxGeometry x="-0.0512" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-1" value="Raspberry Pi" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=TT Rounds Neue Trial DemiBold;" vertex="1" parent="oN9IETQt-yYeFzmijskH-64">
+          <mxGeometry x="294.98" y="375" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.007;entryY=0.501;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="oN9IETQt-yYeFzmijskH-64" source="oN9IETQt-yYeFzmijskH-2" target="oN9IETQt-yYeFzmijskH-16">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="604.98" y="475" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="574.98" y="415" />
+              <mxPoint x="574.98" y="495" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="oN9IETQt-yYeFzmijskH-64" source="oN9IETQt-yYeFzmijskH-2" target="oN9IETQt-yYeFzmijskH-23">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="514.98" y="285" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="504.98" y="330" />
+              <mxPoint x="479.98" y="330" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="oN9IETQt-yYeFzmijskH-64" source="oN9IETQt-yYeFzmijskH-2" target="oN9IETQt-yYeFzmijskH-24">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="524.98" y="330" />
+              <mxPoint x="549.98" y="330" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-2" value="STM8" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=TT Rounds Neue Trial DemiBold;" vertex="1" parent="oN9IETQt-yYeFzmijskH-64">
+          <mxGeometry x="484.98" y="375" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="oN9IETQt-yYeFzmijskH-64" source="oN9IETQt-yYeFzmijskH-4" target="oN9IETQt-yYeFzmijskH-10">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="719.98" y="335" />
+              <mxPoint x="719.98" y="355" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-4" value="Motor Driver 1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=TT Rounds Neue Trial DemiBold;" vertex="1" parent="oN9IETQt-yYeFzmijskH-64">
+          <mxGeometry x="604.98" y="295" width="90" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.03;entryY=0.506;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="oN9IETQt-yYeFzmijskH-64" source="oN9IETQt-yYeFzmijskH-2" target="oN9IETQt-yYeFzmijskH-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="574.98" y="405" />
+              <mxPoint x="574.98" y="325" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-9" value="&lt;font style=&quot;font-size: 30px;&quot; face=&quot;TT Rounds Neue Trial DemiBold&quot;&gt;M&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="oN9IETQt-yYeFzmijskH-64">
+          <mxGeometry x="744.98" y="275" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-10" value="&lt;font style=&quot;font-size: 30px;&quot; face=&quot;TT Rounds Neue Trial DemiBold&quot;&gt;M&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="oN9IETQt-yYeFzmijskH-64">
+          <mxGeometry x="744.98" y="335" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="oN9IETQt-yYeFzmijskH-64" source="oN9IETQt-yYeFzmijskH-4" target="oN9IETQt-yYeFzmijskH-9">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="719.98" y="315" />
+              <mxPoint x="719.98" y="295" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-13" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="oN9IETQt-yYeFzmijskH-64">
+          <mxGeometry x="704.98" y="245" width="110" height="155" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-14" value="&lt;font face=&quot;TT Rounds Neue Trial DemiBold&quot;&gt;Motor&lt;/font&gt;&lt;font face=&quot;Itim&quot;&gt; ฝั่งซ้าย&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;rotation=90;" vertex="1" parent="oN9IETQt-yYeFzmijskH-64">
+          <mxGeometry x="754.98" y="310" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="oN9IETQt-yYeFzmijskH-16" target="oN9IETQt-yYeFzmijskH-18" parent="oN9IETQt-yYeFzmijskH-64">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="719.98" y="505" />
+              <mxPoint x="719.98" y="525" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-16" value="Motor Driver 2" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=TT Rounds Neue Trial DemiBold;" vertex="1" parent="oN9IETQt-yYeFzmijskH-64">
+          <mxGeometry x="604.98" y="465" width="90" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-17" value="&lt;font style=&quot;font-size: 30px;&quot; face=&quot;TT Rounds Neue Trial DemiBold&quot;&gt;M&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="oN9IETQt-yYeFzmijskH-64">
+          <mxGeometry x="744.98" y="445" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-18" value="&lt;font style=&quot;font-size: 30px;&quot; face=&quot;TT Rounds Neue Trial DemiBold&quot;&gt;M&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="oN9IETQt-yYeFzmijskH-64">
+          <mxGeometry x="744.98" y="505" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="oN9IETQt-yYeFzmijskH-16" target="oN9IETQt-yYeFzmijskH-17" parent="oN9IETQt-yYeFzmijskH-64">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="719.98" y="485" />
+              <mxPoint x="719.98" y="465" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-20" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="oN9IETQt-yYeFzmijskH-64">
+          <mxGeometry x="704.98" y="420" width="110" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-21" value="&lt;font face=&quot;TT Rounds Neue Trial DemiBold&quot;&gt;Motor&lt;/font&gt;&lt;font face=&quot;Itim&quot;&gt; ฝั่งขวา&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;rotation=90;" vertex="1" parent="oN9IETQt-yYeFzmijskH-64">
+          <mxGeometry x="754.98" y="480" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-23" value="&lt;font face=&quot;TT Rounds Neue Trial DemiBold&quot;&gt;Servo Motor&lt;/font&gt;&lt;div&gt;&lt;font face=&quot;TT Rounds Neue Trial DemiBold&quot;&gt;Pan&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="oN9IETQt-yYeFzmijskH-64">
+          <mxGeometry x="454.98" y="225" width="50" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-24" value="&lt;font face=&quot;TT Rounds Neue Trial DemiBold&quot;&gt;Servo Motor&lt;/font&gt;&lt;div&gt;&lt;font face=&quot;TT Rounds Neue Trial DemiBold&quot;&gt;Tilt&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="oN9IETQt-yYeFzmijskH-64">
+          <mxGeometry x="524.98" y="225" width="50" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-27" value="&lt;font face=&quot;TT Rounds Neue Trial DemiBold&quot;&gt;Camera&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="oN9IETQt-yYeFzmijskH-64">
+          <mxGeometry x="324.98" y="275" width="60" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-29" value="&lt;font face=&quot;TT Rounds Neue Trial DemiBold&quot;&gt;Ultrasonic Sensor&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="oN9IETQt-yYeFzmijskH-64">
+          <mxGeometry x="424.98" y="515" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-31" value="IR Avoidance" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=TT Rounds Neue Trial DemiBold;" vertex="1" parent="oN9IETQt-yYeFzmijskH-64">
+          <mxGeometry x="14.98" y="335" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-33" value="Buzzer" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=TT Rounds Neue Trial DemiBold;" vertex="1" parent="oN9IETQt-yYeFzmijskH-64">
+          <mxGeometry x="14.98" y="420" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-35" value="IR Tracking" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=TT Rounds Neue Trial DemiBold;" vertex="1" parent="oN9IETQt-yYeFzmijskH-64">
+          <mxGeometry x="144.98" y="515" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-37" value="On-board LED" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=TT Rounds Neue Trial DemiBold;" vertex="1" parent="oN9IETQt-yYeFzmijskH-64">
+          <mxGeometry x="294.98" y="515" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="oN9IETQt-yYeFzmijskH-64" source="oN9IETQt-yYeFzmijskH-48" target="oN9IETQt-yYeFzmijskH-50">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="494.98" y="135" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-48" value="Battery" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=TT Rounds Neue Trial DemiBold;" vertex="1" parent="oN9IETQt-yYeFzmijskH-64">
+          <mxGeometry x="459.98" y="35" width="70" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="oN9IETQt-yYeFzmijskH-64" source="oN9IETQt-yYeFzmijskH-50" target="oN9IETQt-yYeFzmijskH-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-55" value="12V" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=TT Rounds Neue Trial DemiBold;" vertex="1" connectable="0" parent="oN9IETQt-yYeFzmijskH-53">
+          <mxGeometry x="0.243" y="-1" relative="1" as="geometry">
+            <mxPoint y="38" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-50" value="Power Management&lt;div&gt;and Protection&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=TT Rounds Neue Trial DemiBold;" vertex="1" parent="oN9IETQt-yYeFzmijskH-64">
+          <mxGeometry x="434.98" y="115" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-52" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.862;entryY=-0.026;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="oN9IETQt-yYeFzmijskH-64" source="oN9IETQt-yYeFzmijskH-58" target="oN9IETQt-yYeFzmijskH-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="397.98" y="290" />
+              <mxPoint x="397.98" y="290" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-57" value="&lt;font face=&quot;TT Rounds Neue Trial DemiBold&quot;&gt;5V&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="oN9IETQt-yYeFzmijskH-52">
+          <mxGeometry x="0.6249" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-54" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="oN9IETQt-yYeFzmijskH-64" source="oN9IETQt-yYeFzmijskH-50">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="624.98" y="525" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="844.98" y="145" />
+              <mxPoint x="844.98" y="615" />
+              <mxPoint x="624.98" y="615" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-56" value="12V" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=TT Rounds Neue Trial DemiBold;" vertex="1" connectable="0" parent="oN9IETQt-yYeFzmijskH-54">
+          <mxGeometry x="-0.1688" y="-2" relative="1" as="geometry">
+            <mxPoint x="-218" y="271" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-59" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="oN9IETQt-yYeFzmijskH-64" source="oN9IETQt-yYeFzmijskH-50" target="oN9IETQt-yYeFzmijskH-58">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="434.98" y="135" as="sourcePoint" />
+            <mxPoint x="394.98" y="163" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="398.98" y="145" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-58" value="Stepdown Converter" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=TT Rounds Neue Trial DemiBold;" vertex="1" parent="oN9IETQt-yYeFzmijskH-64">
+          <mxGeometry x="358.98" y="195" width="80" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-63" value="&lt;font style=&quot;font-size: 3px;&quot; face=&quot;TT Rounds Neue Trial DemiBold&quot;&gt;OpenFruit&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="oN9IETQt-yYeFzmijskH-64">
+          <mxGeometry x="284.98" y="411" width="40" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

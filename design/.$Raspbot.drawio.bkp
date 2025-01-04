@@ -1,0 +1,129 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.17 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.17">
+  <diagram name="Page-1" id="KJ2CoAAkBJzV66dclzXa">
+    <mxGraphModel dx="830" dy="482" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2336" pageHeight="1654" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="oN9IETQt-yYeFzmijskH-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="oN9IETQt-yYeFzmijskH-1" target="oN9IETQt-yYeFzmijskH-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;" edge="1" parent="1" source="oN9IETQt-yYeFzmijskH-1" target="oN9IETQt-yYeFzmijskH-27">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1050" y="510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-1" value="Raspberry Pi" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=TT Rounds Neue Trial DemiBold;" vertex="1" parent="1">
+          <mxGeometry x="990" y="580" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.007;entryY=0.501;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="oN9IETQt-yYeFzmijskH-2" target="oN9IETQt-yYeFzmijskH-16">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1300" y="680" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1270" y="620" />
+              <mxPoint x="1270" y="700" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="oN9IETQt-yYeFzmijskH-2" target="oN9IETQt-yYeFzmijskH-23">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1210" y="490" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1200" y="535" />
+              <mxPoint x="1175" y="535" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="oN9IETQt-yYeFzmijskH-2" target="oN9IETQt-yYeFzmijskH-24">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1220" y="535" />
+              <mxPoint x="1245" y="535" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-2" value="STM8" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=TT Rounds Neue Trial DemiBold;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="580" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="oN9IETQt-yYeFzmijskH-4" target="oN9IETQt-yYeFzmijskH-10">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1415" y="540" />
+              <mxPoint x="1415" y="560" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-4" value="Motor Driver 1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=TT Rounds Neue Trial DemiBold;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="500" width="90" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.03;entryY=0.506;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="oN9IETQt-yYeFzmijskH-2" target="oN9IETQt-yYeFzmijskH-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1270" y="610" />
+              <mxPoint x="1270" y="530" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-9" value="&lt;font style=&quot;font-size: 30px;&quot; face=&quot;TT Rounds Neue Trial DemiBold&quot;&gt;M&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="480" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-10" value="&lt;font style=&quot;font-size: 30px;&quot; face=&quot;TT Rounds Neue Trial DemiBold&quot;&gt;M&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="540" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="oN9IETQt-yYeFzmijskH-4" target="oN9IETQt-yYeFzmijskH-9">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1415" y="520" />
+              <mxPoint x="1415" y="500" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-13" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1420" y="470" width="90" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-14" value="&lt;font face=&quot;TT Rounds Neue Trial DemiBold&quot;&gt;Motor&lt;/font&gt;&lt;font face=&quot;Itim&quot;&gt; ฝั่งซ้าย&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;rotation=90;" vertex="1" parent="1">
+          <mxGeometry x="1450" y="515" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="oN9IETQt-yYeFzmijskH-16" target="oN9IETQt-yYeFzmijskH-18" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1415" y="710" />
+              <mxPoint x="1415" y="730" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-16" value="Motor Driver 1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=TT Rounds Neue Trial DemiBold;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="670" width="90" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-17" value="&lt;font style=&quot;font-size: 30px;&quot; face=&quot;TT Rounds Neue Trial DemiBold&quot;&gt;M&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="650" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-18" value="&lt;font style=&quot;font-size: 30px;&quot; face=&quot;TT Rounds Neue Trial DemiBold&quot;&gt;M&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="710" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="oN9IETQt-yYeFzmijskH-16" target="oN9IETQt-yYeFzmijskH-17" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1415" y="690" />
+              <mxPoint x="1415" y="670" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-20" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1420" y="640" width="90" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-21" value="&lt;font face=&quot;TT Rounds Neue Trial DemiBold&quot;&gt;Motor&lt;/font&gt;&lt;font face=&quot;Itim&quot;&gt; ฝั่งขวา&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;rotation=90;" vertex="1" parent="1">
+          <mxGeometry x="1450" y="685" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-23" value="&lt;font face=&quot;TT Rounds Neue Trial DemiBold&quot;&gt;Servo Motor&lt;/font&gt;&lt;div&gt;&lt;font face=&quot;TT Rounds Neue Trial DemiBold&quot;&gt;Pan&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="430" width="50" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-24" value="&lt;font face=&quot;TT Rounds Neue Trial DemiBold&quot;&gt;Servo Motor&lt;/font&gt;&lt;div&gt;&lt;font face=&quot;TT Rounds Neue Trial DemiBold&quot;&gt;Tilt&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="430" width="50" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="oN9IETQt-yYeFzmijskH-27" value="&lt;font face=&quot;TT Rounds Neue Trial DemiBold&quot;&gt;Camera&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="480" width="60" height="35" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
