@@ -5,6 +5,7 @@ import { createWindow } from './helpers'
 import { mdns, foundDevice, discoverRover } from "./device_scanner"
 import { g29 } from './joy_interface'
 import { keypressToSpeed } from './util_function'
+import os from "os"
 
 import * as net from "net";
 import { Socket } from 'net'
@@ -42,7 +43,7 @@ if (isProd) {
     // frame: false,
     // simpleFullscreen:true,
     autoHideMenuBar: true,
-    // kiosk: true,
+    kiosk: true,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       // devTools: false,
@@ -65,6 +66,12 @@ app.on('window-all-closed', () => {
 
 ipcMain.on('message', async (event, arg) => {
   event.reply('message', `${arg} World!`)
+})
+
+ipcMain.on("interface",(event,input : string)=>{
+  var networkInterfaces = os.networkInterfaces();
+  // console.log(networkInterfaces)
+  event.reply("interface",networkInterfaces)
 })
 
 ipcMain.on("connect", async (event, connection) => {

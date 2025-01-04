@@ -7,13 +7,14 @@ import { Spinner } from '@nextui-org/spinner'
 import { ColorRing, Grid } from 'react-loader-spinner'
 import { ResumableInterval } from '../../main/util_function'
 import { Dropdown } from 'react-bootstrap'
-
+import os from "os"
 export default function HomePage() {
   var [status, setStatus] = useState(() => ShowConnectionStatus("disconnected"))
   var [connectBtnTxt, setConnectBtnTxt] = useState(() => "Connect Control")
   var [streamImage, setStreamImage] = useState(() => <></>)
   var [isScan, setIsScan] = useState(() => false)
   var [roverList, setRoverList] = useState(() => Object)
+  var [interfaceSelections, setInterfaceSelections] = useState<NodeJS.Dict<os.NetworkInterfaceInfo[]>>()
   var [isConnected, setIsConnected] = useState(false)
   var [takePictureStatus, setTakePictureStatus] = useState(<></>)
   var [takePictureStatusOpacity, setTakePictureStatusOpacity] = useState(0)
@@ -32,6 +33,10 @@ export default function HomePage() {
     onDisconnnect()
     window.ipc.on("getStatus", (message: string) => {
       setIsConnected(prev => message.trim() === "connected")
+    })
+    window.ipc.on("interface", (interfaces: NodeJS.Dict<os.NetworkInterfaceInfo[]>) => {
+      console.log(JSON.stringify(Object.keys(interfaces)))
+      setInterfaceSelections(prev => interfaces)
     })
 
     window.ipc.on("take_picture", (response) => {
@@ -65,6 +70,10 @@ export default function HomePage() {
     window.ipc.send("getStatus", "get");
     return () => { }
   }, [])
+
+  function getInterfaces() {
+    window.ipc.send("interface", "ask")
+  }
 
   function ShowConnectionStatus(connectionText: string) {
     if (connectionText.trim() === "connected") {
@@ -168,7 +177,6 @@ export default function HomePage() {
         </header> */}
       <span className=''>
         {streamImage}
-        {/* <img className="bg-white text-gray-500 m-5 max-w-[1366px] inline-block" src="http://rover:7123/stream.mjpg"/> */}
         {/* {preloadImage("http://rover:7123/stream.mjpg").then((value)=>{return <>{value}</>}).catch((err)=>{return <>{err}</>})} */}
         <span className="inline-block align-middle">
           {/* <span className='mt-4'>
@@ -190,18 +198,18 @@ export default function HomePage() {
             {isConnected ? <><button className='inline bg-blue-600 mx-2 px-4 py-2 rounded-md active:border-white border-4 border-hidden hover:bg-blue-400' onClick={takePicture}>Take Picture 📷</button><br /> </> : <></>}
             <br />
             <div className={`inline opacity-${takePictureStatusOpacity} transition-opacity ease-out duration-${takePictureStatusOpacity == 100 ? 0 : 1000}`}>{takePictureStatus}</div>
+            <br />
 
-            {/* <Dropdown className='inline bg-blue-600 mx-2 px-4 py-2 rounded-md active:border-white border-4 border-hidden hover:bg-blue-700'>
-              <Dropdown.Toggle variant="success" id="dropdown-basic">
-                Dropdown Button
+            <Dropdown className='inline bg-blue-600 mx-2 px-4 py-2 rounded-md active:border-white border-4 border-hidden hover:bg-blue-700'>
+              <Dropdown.Toggle variant="success" id="dropdown-basic" onClick={getInterfaces}>
+                Select Interface
               </Dropdown.Toggle>
               <Dropdown.Menu>
-                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                {/* {Object.keys(interfaceSelections).map((value,index)=>{<></>})} */}
               </Dropdown.Menu>
-            </Dropdown> */}
+            </Dropdown>
           </span>
+                {JSON.stringify(Object.keys(interfaceSelections))}
         </span>
       </span>
       {/* </div> */}
