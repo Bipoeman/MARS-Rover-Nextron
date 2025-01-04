@@ -9,7 +9,7 @@ var networkInterfaces = os.networkInterfaces();
 // console.log(networkInterfaces)
 var ipaddr : string[] = []
 var macs = []
-var interfaces = networkInterfaces['Ethernet']
+var interfaces = networkInterfaces['Ethernet 3']
 // console.log(interfaces)
 interfaces && interfaces.forEach((ip) => {
   if (ip.family == "IPv4") {
@@ -38,7 +38,7 @@ var foundDevice = {}
 //   console.log("Query")
 //   mdns.query({
 //     questions: [{
-//       name: 'jellyfish.local',
+//       name: 'rover-car.local',
 //       type: 'A',
 //       class: "IN"
 //     }]
@@ -55,7 +55,7 @@ export function discoverRover(onFound : (response : Object) => void) {
   console.log("Query")
   mdns.query({
     questions: [{
-      name: 'jellyfish.local',
+      name: 'rover-car.local',
       type: 'A',
       class: "IN"
     }]
@@ -63,8 +63,8 @@ export function discoverRover(onFound : (response : Object) => void) {
 }
 
 mdns.on('response', function (response) {
-  // console.log(response.answers)
-  if (response.answers[0] && response.answers[0].name.includes("jellyfish.local")) {
+  console.log(response.answers)
+  if (response.answers[0] && response.answers[0].name.includes("rover-car.local")) {
     console.log("Answers")
     // if (response.answers[0]['data']){
       var ip = response.answers[0]['data']

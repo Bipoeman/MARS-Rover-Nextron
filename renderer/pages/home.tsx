@@ -6,16 +6,17 @@ import RoverConnection from './connect_btn'
 import { Spinner } from '@nextui-org/spinner'
 import { ColorRing, Grid } from 'react-loader-spinner'
 import { ResumableInterval } from '../../main/util_function'
+import { Dropdown } from 'react-bootstrap'
 
 export default function HomePage() {
   var [status, setStatus] = useState(() => ShowConnectionStatus("disconnected"))
   var [connectBtnTxt, setConnectBtnTxt] = useState(() => "Connect Control")
-  var [streamImage, setStreamImage] = useState(() => <div></div>)
+  var [streamImage, setStreamImage] = useState(() => <></>)
   var [isScan, setIsScan] = useState(() => false)
   var [roverList, setRoverList] = useState(() => Object)
   var [isConnected, setIsConnected] = useState(false)
   var [takePictureStatus, setTakePictureStatus] = useState(<></>)
-  var [takePictureStatusOpacity,setTakePictureStatusOpacity] = useState(0)
+  var [takePictureStatusOpacity, setTakePictureStatusOpacity] = useState(0)
 
   var [requestIntervalControl, setRequestIntervalControl] = useState(() =>
     ResumableInterval(() => {
@@ -27,20 +28,21 @@ export default function HomePage() {
 
 
   useEffect(() => {
+    window.ipc.send("take_picture", false)
     onDisconnnect()
     window.ipc.on("getStatus", (message: string) => {
       setIsConnected(prev => message.trim() === "connected")
     })
-    
+
     window.ipc.on("take_picture", (response) => {
       // console.log(`Display ${response['message']}`)
       setTakePictureStatus(<>{response['message']}</>)
       setTakePictureStatusOpacity(100);
-      setTimeout(()=>{
+      setTimeout(() => {
         // console.log(`No Display ${response['message']}`)
         // setTakePictureStatus(<></>)
         setTakePictureStatusOpacity(0);
-      },1200)
+      }, 1200)
     })
 
     window.ipc.on("getRover", getRover)
@@ -61,23 +63,27 @@ export default function HomePage() {
       setStatus(ShowConnectionStatus(message))
     })
     window.ipc.send("getStatus", "get");
-    return () => {}
+    return () => { }
   }, [])
 
   function ShowConnectionStatus(connectionText: string) {
     if (connectionText.trim() === "connected") {
       return (
-        <div className='bg-[#009900] px-2 py-3 rounded-md my-2 text-center inline ml-1'>
+        // <div className='bg-[#009900] px-2 py-3 rounded-md my-2 text-center inline ml-1'>
+        /* </div> */
+        <>
           Connected
-        </div>
+        </>
       )
     }
     else if (connectionText.trim() === "disconnected") {
 
       return (
-        <div className='bg-gray-500 px-2 py-3 rounded-md my-2 text-center inline ml-1'>
+        <>
           Disconnected
-        </div>
+        </>
+        // <div className='bg-gray-500 px-2 py-3 rounded-md my-2 text-center inline ml-1'>
+        /* </div> */
       )
     }
 
@@ -95,7 +101,7 @@ export default function HomePage() {
 
   function onDisconnnect() {
     window.ipc.send("connect", null)
-    setStreamImage(<div></div>)
+    setStreamImage(<span></span>)
   }
 
   function RoverListDisplay() {
@@ -107,16 +113,18 @@ export default function HomePage() {
         className='block rounded-md px-4 py-2 mb-3 mx-3 hover:bg-gray-400' key={key}>
         {key} : {roverList[key]}
       </button>)
-    return <div className='w-10vw'>{out}</div>
+    return <span className='w-10vw inline'>{out}</span>
   }
+
 
   function preloadImage(src: string) {
     const image = new Image()
     image.onload = () => {
-      setStreamImage(<img src={image.src} />)
+      setStreamImage(<img className="inline" src={image.src} />)
+      startScanRover()
     }
     image.onerror = () => {
-      setStreamImage(<div>Load Failed</div>)
+      setStreamImage(<span>Load Failed</span>)
     }
     // image.src = "http://rover:712/stream.mjpg"
     image.src = src
@@ -135,7 +143,7 @@ export default function HomePage() {
     if (isScan) {
       console.log("Stop Scan")
       requestIntervalControl.stop()
-      setRoverList(prev=>Object)
+      setRoverList(prev => Object)
     }
     else {
       console.log("Start Scan")
@@ -143,7 +151,7 @@ export default function HomePage() {
     }
   }
   function takePicture() {
-    window.ipc.send("take_picture",null)
+    window.ipc.send("take_picture", null)
   }
 
 
@@ -152,35 +160,51 @@ export default function HomePage() {
       <Head>
         <title>Mars Rover Control</title>
       </Head>
-      <div className="block h-[100vh]">
-        <header className="inline-block w-full">
+      {/* <div className="block h-[100vh]"> */}
+      {/* <header className="inline-block w-full">
           <h1 className="text-center text-2xl">
             Rover Camera Display
           </h1>
-        </header>
-        <div className=''>
-          {streamImage}
-          {/* <img className="bg-white text-gray-500 m-5 max-w-[1366px] inline-block" src="http://rover:7123/stream.mjpg"/> */}
-          {/* {preloadImage("http://rover:7123/stream.mjpg").then((value)=>{return <>{value}</>}).catch((err)=>{return <>{err}</>})} */}
-          <span className="inline-block">
-            <span className='mt-4'>
-              Status :
-              {status}
-            </span>
-            <span className='block'>
-              {/* <RoverConnection btnTxt={connectBtnTxt} /> */}
-              {/* <button className='inline-block bg-blue-600 mx-2 px-4 py-2 rounded-md active:border-white border-4 border-hidden hover:bg-blue-400' onClick={preloadImage}>Connect Video</button> */}
-              <button className='inline-block bg-blue-600 mx-2 px-4 py-2 rounded-md active:border-white border-4 border-hidden hover:bg-blue-400' onClick={startScanRover}>Scan Rover</button>
-              {isScan ? <ColorRing wrapperClass='inline padding-0' width={50} /> : <></>}
-              {isConnected ? <button onClick={onDisconnnect} className="mx-2 my-2 px-3 py-2 rounded-md bg-[#CC2222] hover:bg-blue-500">Disconnect</button> : <></>}
-              <ControlButton />
-              <RoverListDisplay />
-              <button className='inline-block bg-blue-600 mx-2 px-4 py-2 rounded-md active:border-white border-4 border-hidden hover:bg-blue-400' onClick={takePicture}>Take Picture 📷</button>
-              <div className={`inline-block opacity-${takePictureStatusOpacity} transition-opacity ease-out duration-${takePictureStatusOpacity == 100 ? 0 : 1000}`}>{takePictureStatus}</div>
-            </span>
+        </header> */}
+      <span className=''>
+        {streamImage}
+        {/* <img className="bg-white text-gray-500 m-5 max-w-[1366px] inline-block" src="http://rover:7123/stream.mjpg"/> */}
+        {/* {preloadImage("http://rover:7123/stream.mjpg").then((value)=>{return <>{value}</>}).catch((err)=>{return <>{err}</>})} */}
+        <span className="inline-block align-middle">
+          {/* <span className='mt-4'>
+            Status : {status}
+          </span> */}
+          <span className='inline'>
+            {/* <RoverConnection btnTxt={connectBtnTxt} /> */}
+            {/* <button className='inline-block bg-blue-600 mx-2 px-4 py-2 rounded-md active:border-white border-4 border-hidden hover:bg-blue-400' onClick={preloadImage}>Connect Video</button> */}
+
+
+            <button className='inline bg-blue-600 mx-2 px-4 py-2 rounded-md active:border-white border-4 border-hidden hover:bg-blue-400' onClick={startScanRover}>Scan Rover</button>
+            {isScan ? <ColorRing wrapperClass='inline padding-0 margin-0' width={50} /> : <></>}
+            <RoverListDisplay />
+
+            {isConnected ? <> <button onClick={onDisconnnect} className="mx-2 my-2 px-3 py-2 rounded-md bg-[#CC2222] hover:bg-blue-500">Disconnect</button> <br /></> : <></>}
+
+            <ControlButton />
+
+            {isConnected ? <><button className='inline bg-blue-600 mx-2 px-4 py-2 rounded-md active:border-white border-4 border-hidden hover:bg-blue-400' onClick={takePicture}>Take Picture 📷</button><br /> </> : <></>}
+            <br />
+            <div className={`inline opacity-${takePictureStatusOpacity} transition-opacity ease-out duration-${takePictureStatusOpacity == 100 ? 0 : 1000}`}>{takePictureStatus}</div>
+
+            {/* <Dropdown className='inline bg-blue-600 mx-2 px-4 py-2 rounded-md active:border-white border-4 border-hidden hover:bg-blue-700'>
+              <Dropdown.Toggle variant="success" id="dropdown-basic">
+                Dropdown Button
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown> */}
           </span>
-        </div>
-      </div>
+        </span>
+      </span>
+      {/* </div> */}
     </>
   )
 }

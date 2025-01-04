@@ -10,9 +10,10 @@ import * as net from "net";
 import { Socket } from 'net'
 
 var connected = false;
-export var globalClient : Socket
+export var globalClient: Socket
 
 var globalConnection = {}
+var globalImageEvent
 
 var keypressed = {
   'W': 0,
@@ -38,10 +39,16 @@ if (isProd) {
     width: 1000,
     height: 600,
     icon: `./resources/icon.png`,
+    // frame: false,
+    // simpleFullscreen:true,
+    autoHideMenuBar: true,
+    // kiosk: true,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
+      // devTools: false,
     },
   })
+  // mainWindow.removeMenu()
 
   if (isProd) {
     await mainWindow.loadURL('app://./home')
@@ -62,20 +69,20 @@ ipcMain.on('message', async (event, arg) => {
 
 ipcMain.on("connect", async (event, connection) => {
   console.log(connection)
-  if (globalClient){
+  if (globalClient) {
     console.log(`Connecting : ${globalClient.connecting} Closed : ${globalClient.closed}`)
   }
-  if (globalClient && !connection){
+  if (globalClient && !connection) {
     globalClient.end()
   }
   if (!connected) {
     // event.reply("connect","connecting")
-    var client : Socket = await net.connect(connection.port, connection.host, function () {
+    var client: Socket = await net.connect(connection.port, connection.host, function () {
       event.reply("connect", "connected")
       connected = true;
       console.log('connected to server!');
       client.write("Hello")
-      globalConnection = {...connection}
+      globalConnection = { ...connection }
     });
     globalClient = client
 
@@ -109,8 +116,10 @@ ipcMain.on("getStatus", (event, data) => {
   }
 })
 
-ipcMain.on("keyboard", (event, key) => {
-  // console.log(key)
+var stateP;
+
+ipcMain.on("keyboard", async (event, key) => {
+  console.log(key)
   if ((key['key'] === "W" || key['key'] === "A" || key['key'] === "S" || key['key'] === "D")) {
     keypressed[key['key']] = key['state']
     if (JSON.stringify(keypressed) != JSON.stringify(last_keypressed)) {
@@ -123,6 +132,18 @@ ipcMain.on("keyboard", (event, key) => {
 
       console.log(speed)
       last_keypressed = { ...keypressed }
+    }
+  }
+  else if (key['key'] == "P") {
+    if (key['state'] != stateP) {
+      if (key['state'] == 1) {
+        if (globalClient && connected) {
+          var returnStatus = await (await fetch(`http://${globalConnection['host']}:7123/takephoto`)).json()
+          console.log(returnStatus)
+          globalImageEvent.reply("take_picture", returnStatus)
+        }
+      }
+      stateP = key['state']
     }
   }
   else if (!(key['key'] == "W" || key['key'] == "A" || key['key'] == "S" || key['key'] == "D")) {
@@ -143,7 +164,10 @@ ipcMain.on("getRover", (event, enable: boolean) => {
 })
 
 ipcMain.on("take_picture", async (event, param: boolean) => {
-  var returnStatus = await (await fetch(`http://${globalConnection.host}:7123/takephoto`)).json()
-  console.log(returnStatus)
-  event.reply("take_picture",returnStatus)
+  globalImageEvent = event;
+  if (param != false) {
+    var returnStatus = await (await fetch(`http://${globalConnection['host']}:7123/takephoto`)).json()
+    console.log(returnStatus)
+    event.reply("take_picture", returnStatus)
+  }
 })

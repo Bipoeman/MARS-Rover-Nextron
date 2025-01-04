@@ -177,4 +177,8 @@ g29.on("wheel-dpad", (value) => {
     }
 })
 
+g29.on("wheel-button_x",(value)=>{
+    
+})
+
 export { g29 }
