@@ -3,8 +3,9 @@ import { usb, getDeviceList } from 'usb';
 import { globalClient } from './background';
 
 import { ResumableInterval } from './util_function';
+import { connected } from 'process';
 
-var steerMode = 0 // either mode 0 or 1
+var steerMode = 1 // either mode 0 or 1
 
 const devices = getDeviceList();
 var joyVer = {
@@ -13,7 +14,7 @@ var joyVer = {
 }
 var joyConfig = {
     autocenter: false,
-    range: steerMode == 0 ? 360 : 360,
+    range: steerMode == 0 ? 360 : 720,
 }
 
 var joyValue = {
@@ -25,8 +26,8 @@ var joyValue = {
 
 var gear = 1
 
-var sendIntervalControl = ResumableInterval(() => {
-    if (globalClient && !globalClient.closed) {
+export var sendIntervalControl = ResumableInterval(() => {
+    if (globalClient && !globalClient.closed && connected) {
         var padelOut = joyValue.padel - joyValue.brake;
         if (padelOut < 0) {
             padelOut = 0
@@ -53,12 +54,12 @@ var sendIntervalControl = ResumableInterval(() => {
         })
         console.log(speedData)
         globalClient.write(speedData)
-        if (padelOut == 0) {
-            sendIntervalControl.pause()
-        }
+        // if (padelOut == 0) {
+        //     sendIntervalControl.pause()
+        // }
     }
 }
-    , 100)
+    , 200)
 sendIntervalControl.start()
 // console.log(devices)
 devices.forEach(device => {
@@ -82,6 +83,7 @@ usb.on("attach", (device) => {
     g29.connect(joyConfig, (err) => { })
     if (idProduct && idProduct === 0xC24F || idProduct === 0xC260) {
         console.log("Joy Connected", joyVer[idProduct])
+        sendIntervalControl.resume();
     }
 })
 
@@ -90,6 +92,7 @@ usb.on("detach", (device) => {
     // G29 is 0xC24F for PS3 and 0xC260 for PS4
     if (idProduct && idProduct === 0xC24F || idProduct === 0xC260) {
         console.log("Joy is disconnected")
+        sendIntervalControl.pause();
     }
 })
 
@@ -97,14 +100,14 @@ var count = 0
 g29.on('pedals-gas', function (val) {
     // console.log("Gas", val)
     joyValue.padel = val
-    sendIntervalControl.resume()
+    // sendIntervalControl.resume()
 
     // console.log(val)
 })
 g29.on('pedals-brake', function (val) {
     // console.log("Brake", val)
     joyValue.brake = val
-    sendIntervalControl.resume()
+    // sendIntervalControl.resume()
 
     // g.leds(val)
 })
