@@ -230,9 +230,9 @@ export default function HomePage() {
                   onClick={takePicture}>
                   Take Picture 📷
                 </button>
-                <div className={`bg-[#e35296] px-2 py-3 mt-2 rounded-md inline opacity-${takePictureStatusOpacity} transition-opacity ease-out duration-[${takePictureStatusOpacity == 100 ? 100 : 1000}]`}>
+                {takePictureStatusOpacity == 100 ? <div className={`bg-[#e35296] px-2 py-3 mt-2 rounded-md inline opacity-${takePictureStatusOpacity} transition-opacity ease-out duration-[${takePictureStatusOpacity == 100 ? 100 : 1000}]`}>
                   {takePictureStatus}
-                </div>
+                </div> : <></>}
               </span> : <></>}
             </span>
           </span>
