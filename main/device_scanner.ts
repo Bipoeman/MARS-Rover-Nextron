@@ -9,7 +9,7 @@ var networkInterfaces = os.networkInterfaces();
 // console.log(networkInterfaces)
 var ipaddr : string[] = []
 var macs = []
-var interfaces = networkInterfaces['Ethernet 3']
+var interfaces = networkInterfaces['Wi-Fi']
 // console.log(interfaces)
 interfaces && interfaces.forEach((ip) => {
   if (ip.family == "IPv4") {
