@@ -199,17 +199,7 @@ export default function HomePage() {
             <br />
             <div className={`inline opacity-${takePictureStatusOpacity} transition-opacity ease-out duration-${takePictureStatusOpacity == 100 ? 0 : 1000}`}>{takePictureStatus}</div>
             <br />
-
-            <Dropdown className='inline bg-blue-600 mx-2 px-4 py-2 rounded-md active:border-white border-4 border-hidden hover:bg-blue-700'>
-              <Dropdown.Toggle variant="success" id="dropdown-basic" onClick={getInterfaces}>
-                Select Interface
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                {/* {Object.keys(interfaceSelections).map((value,index)=>{<></>})} */}
-              </Dropdown.Menu>
-            </Dropdown>
           </span>
-                {JSON.stringify(Object.keys(interfaceSelections))}
         </span>
       </span>
       {/* </div> */}
