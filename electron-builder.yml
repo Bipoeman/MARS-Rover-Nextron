@@ -1,8 +1,8 @@
 appId: com.openfruit.project
 productName: Mars Rover
-copyright: Copyright © 2018 Yoshihide Shiono
+copyright: Copyright © 2025 Chanathip Yodkhuang
 directories:
-  output: dist
+  output: build
   buildResources: resources
 files:
   - from: .
