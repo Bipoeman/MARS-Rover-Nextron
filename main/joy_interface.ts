@@ -4,7 +4,7 @@ import { globalClient } from './background';
 
 import { ResumableInterval } from './util_function';
 
-var steerMode = 0 // either mode 0 or 1
+var steerMode = 1 // either mode 0 or 1
 
 const devices = getDeviceList();
 var joyVer = {

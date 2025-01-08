@@ -72,6 +72,7 @@ export default function HomePage() {
   }, [])
 
   function getInterfaces() {
+    console.log("Request interfaces")
     window.ipc.send("interface", "ask")
   }
 
@@ -205,10 +206,15 @@ export default function HomePage() {
                 Select Interface
               </Dropdown.Toggle>
               <Dropdown.Menu>
+                <Dropdown.Item>Item 1</Dropdown.Item>
+                <Dropdown.Item>Item 2</Dropdown.Item>
+                {
+                  interfaceSelections ? Object.keys(interfaceSelections).map((value, index) =>
+                    <Dropdown.Item key={`${value}-${index}`}>{value}</Dropdown.Item>
+                  ) : <></>}
               </Dropdown.Menu>
             </Dropdown> */}
           </span>
-                {/* {JSON.stringify(Object.keys(interfaceSelections))} */}
         </span>
       </span>
       {/* </div> */}
