@@ -131,14 +131,15 @@ export default function HomePage() {
     window.ipc.send("connect", null)
     setStreamImage(<span></span>)
   }
-  
+
   function preloadImage(src: string) {
     const image = new Image()
+    console.log(src)
     image.onload = () => {
       setStreamImage(<img className="inline" src={image.src} />)
-      setLoadImageFailedCount(prev=>0)
+      setLoadImageFailedCount(prev => 0)
       if (isScan) {
-        setIsScan(prev=>false)
+        setIsScan(prev => false)
         console.log("Stop Scan")
         requestIntervalControl.stop()
         setRoverList(prev => Object)
@@ -147,12 +148,13 @@ export default function HomePage() {
     image.onerror = () => {
       setStreamImage(<span>Load Failed</span>)
       console.log("Stream Load Error")
-      setLoadImageFailedCount(prev=>{
-        if (prev < maxGetImageAttempt){
+      setTimeout(() => (setLoadImageFailedCount(prev => {
+        if (prev < maxGetImageAttempt) {
           preloadImage(src)
         }
-        return prev+1
-      })
+        return prev + 1
+      })), 200)
+
     }
     // image.src = "http://rover:712/stream.mjpg"
     image.src = src
