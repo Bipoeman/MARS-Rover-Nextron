@@ -18,6 +18,12 @@ var globalConnection = {}
 var globalImageEvent
 var globalWindow: Electron.CrossProcessExports.BrowserWindow
 
+interface imagePy {
+  file_path: string,
+  message: string,
+
+}
+
 var keypressed = {
   'W': 0,
   'A': 0,
@@ -58,7 +64,7 @@ if (isProd) {
   } else {
     const port = process.argv[2]
     await mainWindow.loadURL(`http://localhost:${port}/home`)
-    mainWindow.webContents.openDevTools()
+    // mainWindow.webContents.openDevTools()
   }
   globalWindow = mainWindow;
 })()
@@ -138,7 +144,7 @@ ipcMain.on("connect", async (event, connection) => {
           console.log(`Disconnected for some reason, tring to reconnect ${attemptConnectCount}`)
           attemptConnect();
         }
-        else{
+        else {
           disconnectFromCommand = false;
         }
       });
@@ -213,9 +219,10 @@ ipcMain.on("keyboard", async (event, key) => {
     if (key['state'] != stateP) {
       if (key['state'] == 1) {
         if (globalClient && connected) {
-          var returnStatus = await (await fetch(`http://${globalConnection['host']}:7123/takephoto`)).json()
-          console.log(returnStatus)
-          globalImageEvent.reply("take_picture", returnStatus)
+          take_picture()
+          // var returnStatus = await (await fetch(`http://${globalConnection['host']}:7123/takephoto`)).json()
+          // console.log(returnStatus)
+          // globalImageEvent.reply("take_picture", returnStatus)
         }
       }
       stateP = key['state']
@@ -239,10 +246,24 @@ ipcMain.on("getRover", (event, enable: boolean) => {
 })
 
 ipcMain.on("take_picture", async (event, param: boolean) => {
+  console.log("Take Picture")
   globalImageEvent = event;
   if (param != false) {
-    var returnStatus = await (await fetch(`http://${globalConnection['host']}:7123/takephoto`)).json()
-    console.log(returnStatus)
-    event.reply("take_picture", returnStatus)
+    take_picture()
   }
 })
+
+export async function take_picture() {
+  var returnStatus = await (await fetch(`http://${globalConnection['host']}:7123/takephoto`, { method: "GET" })).json()
+  console.log("Take Pic complete")
+  console.log(JSON.stringify(returnStatus))
+  var image = await (await fetch(`http://${globalConnection['host']}:7123/latest_photo`, { method: "GET" })).blob()
+  console.log("Get Pic complete", image)
+  var imgUploadForm = new FormData()
+  imgUploadForm.append("team", returnStatus.team)
+  imgUploadForm.append("photos", image, "image.jpg")
+  var uploadStatus = await (await fetch(`http://jellyfish-pc.local:3002/photos/upload`, { method: "POST", body: imgUploadForm })).json()
+  console.log("Upload complete", JSON.stringify(uploadStatus))
+
+  globalWindow.webContents.send("take_picture", uploadStatus)
+}

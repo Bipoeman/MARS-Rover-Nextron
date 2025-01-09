@@ -1,6 +1,6 @@
 import * as g29 from 'logitech-g29'
 import { usb, getDeviceList } from 'usb';
-import { globalClient } from './background';
+import { globalClient, take_picture } from './background';
 
 import { ResumableInterval } from './util_function';
 import { connected } from 'process';
@@ -181,7 +181,7 @@ g29.on("wheel-dpad", (value) => {
 })
 
 g29.on("wheel-button_x",(value)=>{
-    
+    take_picture()
 })
 
 export { g29 }
