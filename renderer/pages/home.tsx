@@ -116,10 +116,10 @@ export default function HomePage() {
   function onSelect(selected: string) {
     console.log(`Selected ${selected}`)
     var ip = selected
-    setSelectedRover(() => selected)
-    preloadImage(`http://${ip}:7123/stream.mjpg`)
+    setSelectedRover((prev) => selected)
+    preloadImage(`http://${selected}:7123/stream.mjpg`)
     var connection = {
-      "host": `${ip}`,
+      "host": `${selected}`,
       "port": 8000
     }
     // if (!isConnected) {
@@ -130,11 +130,12 @@ export default function HomePage() {
   function onDisconnnect() {
     window.ipc.send("connect", null)
     setStreamImage(<span></span>)
+    setSelectedRover(prev=>"")
   }
 
-  function preloadImage(src: string) {
+  function preloadImage(imgSrc: string) {
     const image = new Image()
-    console.log(src)
+    console.log(imgSrc)
     image.onload = () => {
       setStreamImage(<img className="inline" src={image.src} />)
       setLoadImageFailedCount(prev => 0)
@@ -147,17 +148,17 @@ export default function HomePage() {
     }
     image.onerror = () => {
       setStreamImage(<span>Load Failed</span>)
-      console.log("Stream Load Error")
+      console.log("Stream Load Error",selectedRover)
       setTimeout(() => (setLoadImageFailedCount(prev => {
         if (prev < maxGetImageAttempt) {
-          preloadImage(src)
+          preloadImage(imgSrc)
         }
         return prev + 1
       })), 200)
 
     }
     // image.src = "http://rover:712/stream.mjpg"
-    image.src = src
+    image.src = imgSrc
     setStreamImage(<Grid color='white' />)
   }
 
@@ -192,7 +193,10 @@ export default function HomePage() {
       </Head>
       <div className='bg-[#07141d] text-[#fbf2d0] h-screen'>
         <span className={` flex flex-row justify-between flex-wrap ${k2d.className}`}>
-          {streamImage}
+          {/* {streamImage} */}
+          {selectedRover.length > 0 ? <span className='inline-block'>
+            <img src={`http://${selectedRover}:7123/stream.mjpg`}/>
+          </span> : <></>}
           <span className="align-middle">
             <span className='inline-flex flex-col justify-start'>
               <button className='inline bg-[#e1662d] mx-2 px-4 py-2 rounded-md active:border-white border-4 border-hidden hover:bg-[#c1653a]' onClick={startScanRover}>
