@@ -259,14 +259,14 @@ ipcMain.on("take_picture", async (event, param: boolean) => {
 
 export async function take_picture() {
   var returnStatus = await (await fetch(`http://${globalConnection['host']}:7123/takephoto`, { method: "GET" })).json()
-  console.log("Take Pic complete")
+  console.log("Take Pic complete","Getting Pic",`http://${globalConnection['host']}:7123/latest_photo`)
   console.log(JSON.stringify(returnStatus))
   var image = await (await fetch(`http://${globalConnection['host']}:7123/latest_photo`, { method: "GET" })).blob()
   console.log("Get Pic complete", image)
   var imgUploadForm = new FormData()
   imgUploadForm.append("team", returnStatus.team)
   imgUploadForm.append("photos", image, "image.jpg")
-  var uploadStatus = await (await fetch(`http://jellyfish-pc.local:3002/photos/upload`, { method: "POST", body: imgUploadForm })).json()
+  var uploadStatus = await (await fetch(`http://rover-server:3002/photos/upload`, { method: "POST", body: imgUploadForm })).json()
   console.log("Upload complete", JSON.stringify(uploadStatus))
 
   globalWindow.webContents.send("take_picture", uploadStatus)
