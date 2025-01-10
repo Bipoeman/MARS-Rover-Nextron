@@ -3,7 +3,7 @@ import { app, ipcMain } from 'electron'
 import serve from 'electron-serve'
 import { createWindow } from './helpers'
 import { mdns, foundDevice, discoverRover, setMdns } from "./device_scanner"
-import { g29, sendIntervalControl } from './joy_interface'
+import { g29, sendIntervalControl, setGear } from './joy_interface'
 import { keypressToSpeed } from './util_function'
 import os from "os"
 import mdnss from "multicast-dns"
@@ -16,7 +16,7 @@ export var globalClient: Socket
 
 var globalConnection = {}
 var globalImageEvent
-var globalWindow: Electron.CrossProcessExports.BrowserWindow
+export var globalWindow: Electron.CrossProcessExports.BrowserWindow
 
 interface imagePy {
   file_path: string,
@@ -76,6 +76,10 @@ app.on('window-all-closed', () => {
 
 ipcMain.on('message', async (event, arg) => {
   event.reply('message', `${arg} World!`)
+})
+
+ipcMain.on("gear-shift",(event,arg : number)=>{
+  setGear(arg)
 })
 
 ipcMain.on("interface", (event, input: string) => {

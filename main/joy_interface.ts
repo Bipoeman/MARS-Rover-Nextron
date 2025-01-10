@@ -1,10 +1,8 @@
 import * as g29 from 'logitech-g29'
 import { usb, getDeviceList } from 'usb';
-import { globalClient, take_picture } from './background';
+import { globalClient, globalWindow, take_picture } from './background';
 
 import { ResumableInterval } from './util_function';
-import { connected } from 'process';
-
 var steerMode = 1 // either mode 0 or 1
 
 const devices = getDeviceList();
@@ -14,7 +12,8 @@ var joyVer = {
 }
 var joyConfig = {
     autocenter: false,
-    range: steerMode == 0 ? 360 : 720,
+    range: steerMode == 0 ? 360 : 540
+    ,
 }
 
 var joyValue = {
@@ -26,8 +25,12 @@ var joyValue = {
 
 var gear = 1
 
+export function setGear(gearIn : number){
+    gear = gearIn
+}
+
 export var sendIntervalControl = ResumableInterval(() => {
-    if (globalClient && !globalClient.closed && connected) {
+    if (globalClient && !globalClient.closed) {
         var padelOut = joyValue.padel - joyValue.brake;
         if (padelOut < 0) {
             padelOut = 0
@@ -60,7 +63,7 @@ export var sendIntervalControl = ResumableInterval(() => {
     }
 }
     , 200)
-sendIntervalControl.start()
+
 // console.log(devices)
 devices.forEach(device => {
     var idProduct = device.deviceDescriptor.idProduct
@@ -73,6 +76,7 @@ devices.forEach(device => {
     }
     if (idProduct && idProduct === 0xC24F || idProduct === 0xC260) {
         console.log("Initial check Joy already connected", joyVer[idProduct])
+        sendIntervalControl.start()
         // g29.connect(joyConfig, (err) => { })
     }
 })
@@ -83,7 +87,7 @@ usb.on("attach", (device) => {
     g29.connect(joyConfig, (err) => { })
     if (idProduct && idProduct === 0xC24F || idProduct === 0xC260) {
         console.log("Joy Connected", joyVer[idProduct])
-        sendIntervalControl.resume();
+        sendIntervalControl.start()
     }
 })
 
@@ -92,7 +96,7 @@ usb.on("detach", (device) => {
     // G29 is 0xC24F for PS3 and 0xC260 for PS4
     if (idProduct && idProduct === 0xC24F || idProduct === 0xC260) {
         console.log("Joy is disconnected")
-        sendIntervalControl.pause();
+        sendIntervalControl.stop();
     }
 })
 
@@ -130,10 +134,16 @@ g29.on("wheel-turn", (value) => {
 g29.on("wheel-shift_left", (value) => {
     console.log(value)
     gear = -1
+    if (globalWindow) {
+        globalWindow.webContents.send("gear-shift", gear)
+    }
 })
 g29.on("wheel-shift_right", (value) => {
     console.log(value)
     gear = 1
+    if (globalWindow) {
+        globalWindow.webContents.send("gear-shift", gear)
+    }
 })
 g29.on("wheel-spinner", (value) => {
     if (value && value == 1) {
@@ -180,7 +190,7 @@ g29.on("wheel-dpad", (value) => {
     }
 })
 
-g29.on("wheel-button_x",(value)=>{
+g29.on("wheel-button_x", (value) => {
     take_picture()
 })
 

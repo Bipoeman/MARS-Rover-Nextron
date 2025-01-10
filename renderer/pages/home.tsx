@@ -15,6 +15,7 @@ const k2d = K2D({ weight: "400", subsets: ["latin"] })
 var maxGetImageAttempt = 50;
 export default function HomePage() {
   var [streamImage, setStreamImage] = useState(() => <></>)
+  var [gear, setGear] = useState(1)
   var [isScan, setIsScan] = useState(() => false)
   var [roverList, setRoverList] = useState(() => Object)
   var [selectedRover, setSelectedRover] = useState(() => "")
@@ -37,6 +38,9 @@ export default function HomePage() {
   useEffect(() => {
     window.ipc.send("take_picture", false)
     onDisconnnect()
+    window.ipc.on("gear-shift", (arg: number) => {
+      setGear(prev => arg)
+    })
     window.ipc.on("getStatus", (message: string) => {
       setIsConnected(prev => message.trim() === "connected")
       if (isConnected) {
@@ -150,6 +154,15 @@ export default function HomePage() {
             <img src={`http://${selectedRover}:7123/stream.mjpg`} loading='eager' />
           </span> : <></>}
           <span className='align-middle inline-flex flex-col justify-center'>
+            {isConnected ? <span className='inline-flex flex-col justify-center items-center'>
+              <span className='text-2xl font-semibold mb-0'>Gear</span>
+              <span className='mx-2 inline-flex flex-row mb-2'>
+                <span className={`flex items-center w-16 h-16 ${gear == 1 ? "" : "border-solid border-[#e1662d] border-4 transition-colors"} text-center justify-center align-middle rounded-md text-2xl font-normal`}>R</span>
+                <span className='w-2'></span>
+                <span className={`flex items-center w-16 h-16 ${gear == -1 ? "" : "border-solid border-[#e1662d] border-4 transition-colors"} text-center justify-center align-middle rounded-md text-2xl font-normal`}>D</span>
+              </span>
+
+            </span> : <></>}
             <button className='inline bg-[#e1662d] mx-2 px-4 py-2 rounded-md active:border-white border-4 border-hidden hover:bg-[#c1653a]' onClick={startScanRover}>
               {`Scan Rover`}
               {isScan && Object.keys(roverList).length == 0 ? <Radio height={30} width={40} wrapperClass='inline-block padding-0 margin-0' colors={["#fbf2d0", "#fbf2d0", "#fbf2d0"]} /> : <></>}
